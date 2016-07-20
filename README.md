@@ -209,53 +209,9 @@ public class PokitDokTest {
 ## Supported Java versions
 This library aims to support and is tested against these Java versions.
 
-* Oracle: Java SE 8, Java SE 7, Java SE 6 (with caveat)
-* OpenJDK: OpenJDK 7, OpenJDK 6
+* Oracle: Java SE 8, Java SE 7
+* OpenJDK: OpenJDK 7
 
-### Java SE 6 Caveat
-Java SE 6, being rather old, doesn't support the more rigorous security settings employed by the PokitDok
-Platform servers. If you use the library as-is, you'll receive an error along the lines of:
-
-```
-Exception in thread "main" javax.net.ssl.SSLException: java.lang.RuntimeException: Could not generate DH keypair
-  at com.sun.net.ssl.internal.ssl.Alerts.getSSLException(Alerts.java:190)
-  at com.sun.net.ssl.internal.ssl.SSLSocketImpl.fatal(SSLSocketImpl.java:1747)
-  at com.sun.net.ssl.internal.ssl.SSLSocketImpl.fatal(SSLSocketImpl.java:1708)
-  at com.sun.net.ssl.internal.ssl.SSLSocketImpl.handleException(SSLSocketImpl.java:1691)
-  at com.sun.net.ssl.internal.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:1222)
-  at com.sun.net.ssl.internal.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:1199)
-  at org.apache.http.conn.ssl.SSLConnectionSocketFactory.createLayeredSocket(SSLConnectionSocketFactory.java:290)
-  at org.apache.http.conn.ssl.SSLConnectionSocketFactory.connectSocket(SSLConnectionSocketFactory.java:259)
-  at org.apache.http.impl.conn.HttpClientConnectionOperator.connect(HttpClientConnectionOperator.java:125)
-  at org.apache.http.impl.conn.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:319)
-  at org.apache.http.impl.execchain.MainClientExec.establishRoute(MainClientExec.java:363)
-  at org.apache.http.impl.execchain.MainClientExec.execute(MainClientExec.java:219)
-  at org.apache.http.impl.execchain.ProtocolExec.execute(ProtocolExec.java:195)
-  at org.apache.http.impl.execchain.RetryExec.execute(RetryExec.java:86)
-  at org.apache.http.impl.execchain.RedirectExec.execute(RedirectExec.java:108)
-  at org.apache.http.impl.client.InternalHttpClient.doExecute(InternalHttpClient.java:184)
-  at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:82)
-  at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:106)
-  at com.pokitdok.PokitDok.connect(PokitDok.java:78)
-```
-
-To work around this error, you may use the replacement security provider from BouncyCastle. Download
-the JDK 1.5 - 1.7 security provider JAR from [http://www.bouncycastle.org/latest_releases.html](http://www.bouncycastle.org/latest_releases.html) (the filename will be _bcprov-jdk15on-VERSION.jar_) and put
-it on your CLASSPATH. In your code, import the Java security class, and the new BouncyCastle provider:
-
-```java
-import java.security.Security;
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
-```
-
-Then, before instantiating the PokitDok class, do the following:
-```java
-/* This line enables the replacement security provider. */
-Security.addProvider(new BouncyCastleProvider());
-```
-
-Of course, the recommended fix is to upgrade to a supported JDK version, but if this is not possible, the
-above fix should work for you.
 ## License
 Copyright (c) 2014-2016 PokitDok Inc. See [LICENSE][] for details.
 
