@@ -167,9 +167,6 @@ public class PokitDokUnitTests {
 		assertNotNull(response);
 	}
 
-	public void filesTest() throws Exception {
-	}
-
 	@Test
 	@Category(UnitTests.class)
 	public void referralsTest() throws Exception {

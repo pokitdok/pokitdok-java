@@ -125,9 +125,6 @@ public class PokitDokIntegrationTests {
         assertNotNull(response);
     }
 
-    public void filesTest() throws Exception {
-    }
-
     @Test
     @Category(IntegrationTests.class)
     public void referralsTest() throws Exception {
