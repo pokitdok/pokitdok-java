@@ -338,40 +338,6 @@ public class PokitDok {
     }
 
     /**
-        Uploads an EDI file to the files endpoint.
-
-        @param tradingPartnerId the trading partner to transmit to
-        @param filename the path to the file to transmit
-        @throws IOException usually implying a connectivity error reaching the platform server
-        @throws ParseException if the platform server's response couldn't be parsed
-        @throws UnauthorizedException if, after 2 tries, the client could not authenticate with the
-            given client ID and client secret
-        @return a {@link Map} of results
-    */
-    public Map<String, Object> files(String tradingPartnerId, String filename)
-    throws IOException, ParseException, UnauthorizedException {
-        return files(tradingPartnerId, new File(filename));
-    }
-
-    /**
-        Uploads an EDI file to the files endpoint.
-        FIXME: not implemented
-
-        @param tradingPartnerId the trading partner to transmit to
-        @param filename the file to transmit
-        @throws IOException usually implying a connectivity error reaching the platform server
-        @throws ParseException if the platform server's response couldn't be parsed
-        @throws UnauthorizedException if, after 2 tries, the client could not authenticate with the
-            given client ID and client secret
-        @return a {@link Map} of results
-    */
-    public Map<String, Object> files(String tradingPartnerId, File filename)
-    throws IOException, ParseException, UnauthorizedException {
-        String results = "";
-        return (JSONObject) parser.parse(results);
-    }
-
-    /**
         Searches the insurance prices index.
 
         @param params a Map of parameters to include with the request
