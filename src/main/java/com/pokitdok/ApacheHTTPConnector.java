@@ -1,7 +1,6 @@
 package com.pokitdok;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -72,7 +71,7 @@ public class ApacheHTTPConnector implements PokitDokHTTPConnector {
             HttpResponse response = client.execute(request);
             Map<String, Object> parsedResponse = (JSONObject) parser.parse(
                 EntityUtils.toString(response.getEntity()));
-
+            // TODO we should check the response here
             scopeTokens.put(scopeName, (String) parsedResponse.get("access_token"));
         }
         finally {
@@ -87,6 +86,10 @@ public class ApacheHTTPConnector implements PokitDokHTTPConnector {
     private String execute(HttpRequestBase request, String scopeName, Map<String, String> headers)
     throws IOException, ParseException, UnauthorizedException {
         String accessToken = getAccessTokenForScope(scopeName);
+        if (accessToken == null) {
+            throw new UnauthorizedException("Invalid token.  Check your credentials.");
+        }
+
         request.setHeader(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken);
         setDefaultHeaders(request);
         CloseableHttpClient client = builder.build();

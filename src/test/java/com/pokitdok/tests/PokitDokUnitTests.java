@@ -3,7 +3,6 @@ package com.pokitdok.tests;
 import java.io.*;
 import java.util.*;
 import com.pokitdok.*;
-import com.pokitdok.tests.*;
 import com.pokitdok.tests.categories.*;
 import org.apache.commons.io.IOUtils;
 import org.json.simple.*;
@@ -13,7 +12,6 @@ import org.junit.runner.*;
 import org.junit.runners.Suite;
 import org.junit.experimental.categories.Category;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
 public class PokitDokUnitTests {
