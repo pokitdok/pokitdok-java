@@ -1,7 +1,6 @@
 package com.pokitdok;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -72,7 +71,6 @@ public class ApacheHTTPConnector implements PokitDokHTTPConnector {
             HttpResponse response = client.execute(request);
             Map<String, Object> parsedResponse = (JSONObject) parser.parse(
                 EntityUtils.toString(response.getEntity()));
-
             scopeTokens.put(scopeName, (String) parsedResponse.get("access_token"));
         }
         finally {
@@ -87,6 +85,10 @@ public class ApacheHTTPConnector implements PokitDokHTTPConnector {
     private String execute(HttpRequestBase request, String scopeName, Map<String, String> headers)
     throws IOException, ParseException, UnauthorizedException {
         String accessToken = getAccessTokenForScope(scopeName);
+        if (accessToken == null) {
+            throw new UnauthorizedException("Invalid credentials.  Check your client_id and client_secret.");
+        }
+
         request.setHeader(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken);
         setDefaultHeaders(request);
         CloseableHttpClient client = builder.build();
@@ -181,7 +183,7 @@ public class ApacheHTTPConnector implements PokitDokHTTPConnector {
       }
 
       if (throwOnUnauthorized && unauthorized) {
-        throw new UnauthorizedException();
+        throw new UnauthorizedException("Unauthorized");
       }
 
       return unauthorized;
