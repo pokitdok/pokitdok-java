@@ -87,7 +87,7 @@ public class ApacheHTTPConnector implements PokitDokHTTPConnector {
     throws IOException, ParseException, UnauthorizedException {
         String accessToken = getAccessTokenForScope(scopeName);
         if (accessToken == null) {
-            throw new UnauthorizedException("Invalid token.  Check your credentials.");
+            throw new UnauthorizedException("Invalid credentials.  Check your client_id and client_secret.");
         }
 
         request.setHeader(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken);
