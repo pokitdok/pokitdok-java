@@ -3,7 +3,7 @@ package com.pokitdok.tests;
 import java.io.*;
 import java.util.*;
 import com.pokitdok.*;
-import com.pokitdok.tests.categories.*;
+import com.pokitdok.tests.categories.IntegrationTests;
 import org.apache.commons.io.IOUtils;
 import org.json.simple.*;
 import org.junit.*;
@@ -11,7 +11,6 @@ import static org.junit.Assert.*;
 import org.junit.experimental.categories.*;
 import org.junit.runner.*;
 import org.junit.runners.Suite;
-import static org.mockito.Mockito.*;
 
 public class PokitDokIntegrationTests {
     private static PokitDok pd;
@@ -310,7 +309,7 @@ public class PokitDokIntegrationTests {
         Map<String, Object> response = pd.pharmacyPlans(params);
 
         assertNotNull(response);
-        JSONObject data = (JSONObject) response.get("data");
+        JSONArray data = (JSONArray) response.get("data");
         assertNotNull(data);
 	}
 
