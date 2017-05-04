@@ -71,7 +71,6 @@ public class ApacheHTTPConnector implements PokitDokHTTPConnector {
             HttpResponse response = client.execute(request);
             Map<String, Object> parsedResponse = (JSONObject) parser.parse(
                 EntityUtils.toString(response.getEntity()));
-            // TODO we should check the response here
             scopeTokens.put(scopeName, (String) parsedResponse.get("access_token"));
         }
         finally {
@@ -184,7 +183,7 @@ public class ApacheHTTPConnector implements PokitDokHTTPConnector {
       }
 
       if (throwOnUnauthorized && unauthorized) {
-        throw new UnauthorizedException();
+        throw new UnauthorizedException("Unauthorized");
       }
 
       return unauthorized;

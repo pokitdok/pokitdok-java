@@ -2,10 +2,8 @@ package com.pokitdok.tests;
 
 import com.pokitdok.UnauthorizedException;
 import com.pokitdok.PokitDok;
-import com.pokitdok.tests.categories.IntegrationFailureTests;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 
 import java.util.Map;
 
@@ -28,20 +26,9 @@ public class PokitDokIntegrationFailureTests {
         pd = new PokitDok(clientId, clientSecret, null, apiBase);
     }
 
-    @Test
-    @Category(IntegrationFailureTests.class)
+    @Test(expected = UnauthorizedException.class)
     public void unauthorizedExceptionTest() throws Exception {
-
-        boolean raised = false;
-
-        try {
-            pd.activities();
-        }
-        catch (UnauthorizedException unauthorized) {
-            raised = true;
-        }
-
-        assert(raised);
+        pd.activities();
     }
 
 }
