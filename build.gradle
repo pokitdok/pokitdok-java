@@ -4,7 +4,7 @@ apply plugin: 'signing'
 
 group = "com.pokitdok"
 archivesBaseName = "pokitdok-java"
-version = "0.9.0"
+version = "0.9.1"
 sourceCompatibility = 1.6
 targetCompatibility = 1.6
 
